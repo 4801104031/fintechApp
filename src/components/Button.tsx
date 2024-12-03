@@ -9,7 +9,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({ title, action }) => {
   return (
     <Pressable
-      className="bg-blue-300 rounded-lg justify-center items-center py-3"
+      className="bg-blue-500 rounded-lg justify-center items-center py-3"
       onPress={action}
     >
       <Text className="text-white font-bold text-lg">{title}</Text>

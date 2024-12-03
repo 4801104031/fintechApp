@@ -3,12 +3,13 @@ import { TransitionPresets, createStackNavigator } from "@react-navigation/stack
 import { NavigationContainer } from '@react-navigation/native';
 import AuthNavigation from './AuthNavigation';
 import TabNavigation from './TabNavigation';
+import { useUserStore } from '@/store/useUserStore';
 
 
 const Stack = createStackNavigator();
 
 export default function RootNavigation() {
-  const [session, setSession] = useState(false);
+  const {session} = useUserStore();
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -25,7 +26,7 @@ export default function RootNavigation() {
         
         
         {
-          session ? (
+          session && session.user ? (
             <Stack.Screen name = "TabNavigation" component={TabNavigation} />
           ) : (
             <Stack.Screen name = "AuthNavigation" component={AuthNavigation} />

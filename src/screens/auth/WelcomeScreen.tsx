@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View,} from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
@@ -8,8 +8,15 @@ import ButtonOutline from '@/src/components/ButtonOutline'
 import Breaker from '@/src/components/Breaker'
 import { AntDesign } from '@expo/vector-icons'
 import { Image } from 'react-native'
+import {NavigationProp, useNavigation} from "@react-navigation/native"
 
 export default function WelcomeScreen() {
+  const {navigate : navigateAuth}:NavigationProp<AuthNavigationType>
+   = useNavigation();
+
+
+
+
   return (
     <SafeAreaView className='flex-1 justify-between items-center bg-white'>
       <StatusBar style='auto' />
@@ -51,14 +58,14 @@ export default function WelcomeScreen() {
           entering={FadeInDown.duration(100).delay(300).springify()}
           className='pb-6'
           >
-            <Button title="Đăng Nhập" />
+            <Button title="Đăng Nhập" action={() =>navigateAuth("Login")} />
 
           </Animated.View>
 
           <Animated.View
           entering={FadeInDown.duration(100).delay(400).springify()}
           >
-            <ButtonOutline title = "Đăng Ký" />
+            <ButtonOutline title = "Đăng Ký"action={() =>navigateAuth("Register")} />
 
           </Animated.View>
 
@@ -73,7 +80,7 @@ export default function WelcomeScreen() {
       <View className='w-full justify-normal'> 
         <Animated.View
         entering={FadeInDown.duration(100).delay(100).springify()}
-        className='border border-white pb-4'
+        className='pb-4'
         >
           <ButtonOutline title="Tiếp tục với Google">
           <AntDesign name='google' size={20} color="gray" />
