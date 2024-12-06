@@ -51,7 +51,7 @@ export default function SplashScreen() {
             fontFamily: "PlusJakartaSans",
           }}
           >
-            STACKS</Text>
+            NEWS</Text>
           <Text className='text-blue-300 text-xl leading-[60px] pl-1'
           style ={{
             fontFamily: "PlusJakartaSansBoldItalic",

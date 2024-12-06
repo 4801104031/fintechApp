@@ -1,4 +1,4 @@
-import { View,} from 'react-native'
+import { View,Text} from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
@@ -22,7 +22,7 @@ export default function WelcomeScreen() {
       <StatusBar style='auto' />
       <View className='w-full px-4 items-center justify-center space-y-6 h-full'>
 {/* logo and brand */}
-        <View className='w-full px-4 items-center'>
+        <View className='w-full px-4 items-center mb-5'>
           <Animated.View
           entering={FadeInRight.duration(100).springify()}
           className='flex-row justify-center items-center'
@@ -44,12 +44,15 @@ export default function WelcomeScreen() {
         <View className='justify-center items-center'>
           <Animated.Text
             entering={FadeInDown.duration(100).delay(100).springify()}
-            className='text-neutral-800 text-3xl font-medium leading -[60px]'
+            className='text-neutral-800 text-3xl font-medium leading -[60px] mb-20'
             style={{
               fontFamily: 'PlusJakartaSansBold'
             }}>
             Welcome
           </Animated.Text>
+          <View>
+            
+          </View>
 
         </View>
         {/* login and sigup button */}
@@ -58,46 +61,24 @@ export default function WelcomeScreen() {
           entering={FadeInDown.duration(100).delay(300).springify()}
           className='pb-6'
           >
-            <Button title="Đăng Nhập" action={() =>navigateAuth("Login")} />
+            <Button title="Login" action={() =>navigateAuth("Login")} />
 
           </Animated.View>
 
           <Animated.View
           entering={FadeInDown.duration(100).delay(400).springify()}
           >
-            <ButtonOutline title = "Đăng Ký"action={() =>navigateAuth("Register")} />
+            <ButtonOutline title = "Register"action={() =>navigateAuth("Register")} />
 
           </Animated.View>
 
         </View>
 
         {/* Breaker line */}
-        <View>
-          <Breaker />
-        </View>
+        
 
         {/* 3rd Auth */}
-      <View className='w-full justify-normal'> 
-        <Animated.View
-        entering={FadeInDown.duration(100).delay(100).springify()}
-        className='pb-4'
-        >
-          <ButtonOutline title="Tiếp tục với Google">
-          <AntDesign name='google' size={20} color="gray" />
-          </ButtonOutline>
-
-        </Animated.View>
-
-        <Animated.View
-        entering={FadeInDown.duration(100).delay(700).springify()}
-        className='border border-white pb-4'
-        >
-          <ButtonOutline title="Tiếp tục với Windows">
-          <AntDesign name='windows' size={20} color="gray"  />
-          </ButtonOutline>
-
-        </Animated.View>
-        </View>
+      
        
       </View>
 

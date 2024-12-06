@@ -14,3 +14,13 @@ type AuthNavigationType = {
 type SplashNavigationType = {
     Welcome: undefined;
 }
+type ScreenNavigationType = {
+    CoinDetails: { coinUuid: string }; // Màn hình CoinDetails nhận tham số `coinUuid`
+};
+type HomeNavigationType = {
+    HomeScreen: undefined;
+    CoinDetail: undefined;
+}
+type SearchNavigationType = {
+    SearchScreen: undefined;
+}

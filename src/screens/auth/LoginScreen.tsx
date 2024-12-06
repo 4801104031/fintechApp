@@ -22,25 +22,30 @@ export default function LoginScreen() {
   const {navigate: navigateAuth}:NavigationProp<AuthNavigationType> 
   = useNavigation();
   async function signInWithEmail() {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-      const { data, error
-      } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password
-      })
-      if(error){
-        setIsLoading(false)
-        Alert.alert(error.message)
+      });
+  
+      if (error) {
+        Alert.alert("Lỗi đăng nhập", error.message);
+      } else if (data.session && data.user) {
+        setSession(data.session);
+        setUser(data.user);
+        Alert.alert("Thành công", "Đăng nhập thành công!");
+        // Chuyển hướng đến màn hình chính hoặc màn hình phù hợp
+        // navigateAuth("Home");
+      } else {
+        Alert.alert("Lỗi", "Không thể đăng nhập. Vui lòng thử lại.");
       }
-      if(data.session && data.user)
-        setSession(data.session)
-      setUser(data.user)
-    } catch(e){
-      console.log(e)
+    } catch (e) {
+      console.error(e);
+      Alert.alert("Lỗi", "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại sau.");
+    } finally {
+      setIsLoading(false);
     }
-    
-    
   }
 
  
@@ -73,7 +78,7 @@ export default function LoginScreen() {
               style={{
                 fontFamily: "PlusJakartaSansBold"
               }}>
-              Chào mừng bạn, Đức
+              Welcome!
 
             </Text>
 
@@ -121,29 +126,18 @@ export default function LoginScreen() {
           <Animated.View className='w-full justify-start'
             entering={FadeInDown.duration(100).delay(300).springify()}>
             <View className='pb-6'>
-              <Button title={"Đăng Nhập"} action={() => signInWithEmail()} />
+              <Button title={"Log in"} action={() => signInWithEmail()} />
 
 
             </View>
 
           </Animated.View>
           <View>
-            <Breaker />
+          
           </View>
 
 
-          {/* 3rd Auth */}
-          <View className='w-full justify-normal'>
-            <Animated.View
-              entering={FadeInDown.duration(100).delay(100).springify()}
-              className=' pb-4'
-            >
-              <ButtonOutline title="Tiếp tục với Google">
-                <AntDesign name='google' size={20} color="gray" />
-              </ButtonOutline>
-
-            </Animated.View>
-          </View>
+          
 
           {/* don't have account */}
           <Animated.View
@@ -155,7 +149,7 @@ export default function LoginScreen() {
               style={{
                 fontFamily: "PlusJakartaSansBold",
               }}>
-              Chưa có tài khoản?{" "}
+              Don't have account?{" "}
             </Text>
 
             <Pressable onPress={() => navigateAuth("Register")}>
@@ -164,7 +158,7 @@ export default function LoginScreen() {
                   fontFamily: "PlusJakartaSansBold",
                 }}
               >
-                Đăng kí {" "}
+                Sign up {" "}
               </Text>
             </Pressable>
 
